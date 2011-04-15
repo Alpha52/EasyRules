@@ -47,6 +47,7 @@ public class Rules {
 			in = new BufferedReader(new FileReader(file));
 			String str;
 			result = new LinkedList<String>();
+			core.rulesPrefix = ChatColor.GREEN + "RULES";
 			while ((str = in.readLine()) != null) {
 				if (str.startsWith(search)) { 
 					result.add(str.replace((CharSequence)search, (CharSequence)"").
@@ -68,6 +69,25 @@ public class Rules {
 			            	replaceAll("@pink@", ChatColor.LIGHT_PURPLE + "")
 					);
 				}
+				if (str.startsWith("prefix=")) {
+					core.rulesPrefix = str.replace((CharSequence)"prefix=", (CharSequence)"").
+	            	replaceAll("@red@", ChatColor.RED + "").
+	            	replaceAll("@yellow@", ChatColor.YELLOW + "").
+	            	replaceAll("@gold@", ChatColor.GOLD + "").
+	            	replaceAll("@green@", ChatColor.GREEN + "").
+	            	replaceAll("@darkgreen@", ChatColor.DARK_GREEN + "").
+	            	replaceAll("@blue@", ChatColor.BLUE + "").
+	            	replaceAll("@darkblue@", ChatColor.DARK_BLUE + "").
+	            	replaceAll("@@", ChatColor.WHITE + "").
+	            	replaceAll("@gray@", ChatColor.GRAY + "").
+	            	replaceAll("@darkgray@", ChatColor.DARK_GRAY + "").
+	            	replaceAll("@aqua@", ChatColor.AQUA + "").
+	            	replaceAll("@darkaqua@", ChatColor.DARK_AQUA + "").
+	            	replaceAll("@black@", ChatColor.BLACK + "").
+	            	replaceAll("@darkpurple@", ChatColor.DARK_PURPLE + "").
+	            	replaceAll("@darkred@", ChatColor.DARK_RED + "").
+	            	replaceAll("@pink@", ChatColor.LIGHT_PURPLE + "");
+				}
 			}
 		} catch (IOException e) { player.sendMessage(ChatColor.RED + "ERROR: Unable to read rules"); return false; }
 		//check result empty
@@ -75,7 +95,7 @@ public class Rules {
 		
 		//send player the messages
 		for (String line : result) {
-			player.sendMessage("[" + ChatColor.GREEN + "RULES" + ChatColor.WHITE + "] " + line);
+			player.sendMessage("[" + core.rulesPrefix + ChatColor.WHITE + "] " + line);
 		}
 				
 		return true;
